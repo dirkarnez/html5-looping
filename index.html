@@ -1,0 +1,39 @@
+<!DOCTYPE html> 
+<html> 
+<body> 
+
+<video id="target" width="400" controls loop="true" src="https://www.w3schools.com/html/mov_bbb.mp4">
+  Your browser does not support HTML video.
+</video>
+
+<script>
+const target = document.getElementById("target");
+
+const myData = [
+{
+	start: 1,
+    end: 3,
+},
+{
+	start: 6,
+    end: 8,
+}
+];
+
+target.addEventListener("timeupdate", (event) => {
+  myData.forEach((data, i) => {
+      if (target.currentTime < myData[0].start || isNaN(target.currentTime)) {
+          target.currentTime = myData[0].start;
+      } else if ((target.currentTime > data.end) && ((i < myData.length - 1) && (target.currentTime < myData[i + 1].start))) {
+          	target.currentTime =  myData[i + 1].start;
+          
+      } else if (target.currentTime > myData[myData.length - 1].end) {
+      	target.currentTime = myData[0].start;
+      }
+  });
+});
+
+</script>
+</body> 
+</html>
+
